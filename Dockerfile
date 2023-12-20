@@ -5,6 +5,7 @@ LABEL maintainer="dengqi<dengqi935@gmail.com>"
 RUN apt-get update && apt-get install -y \
     curl \
     git \
+    git-lfs \
     vim \
     wget \
     build-essential \
