@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     gnupg-agent \
     zsh \
+    software-properties-common \
     && add-apt-repository -y ppa:deadsnakes/ppa \
     && add-apt-repository -y ppa:longsleep/golang-backports \
     && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
