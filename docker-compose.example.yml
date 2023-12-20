@@ -17,8 +17,8 @@ services:
     env_file:
       - .env
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${UID}
+      - PGID=${GID}
       - TZ=Asia/Shanghai
     volumes:
       - ./workspace:/config
