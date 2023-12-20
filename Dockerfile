@@ -16,7 +16,13 @@ RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     gnupg-agent \
+    ninja-build \
+    cmake \
     zsh \
+    fzf \
+    fd \
+    ripgrep \
+    exa \
     software-properties-common \
     && add-apt-repository -y ppa:deadsnakes/ppa \
     && add-apt-repository -y ppa:longsleep/golang-backports \
@@ -38,7 +44,7 @@ RUN apt-get update && apt-get install -y \
     && echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main" >> /etc/apt/sources.list.d/llvm.list \
     && echo "#deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy main" >> /etc/apt/sources.list.d/llvm.list \
     && apt-get update && apt-get install -y \
-    clang-format clang-tidy clang-tools clang clangd libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld lldb llvm-dev llvm-runtime llvm python3-clang \
+    clang-format clang-tidy clang-tools clang clangd libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld llvm-dev llvm-runtime llvm python3-clang \
     && apt-get install -y unrar unzip stow pv \
     && apt-get clean \ 
     && rm -rf /var/lib/apt/lists/* \
