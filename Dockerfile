@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
     cmake \
     zsh \
     fzf \
-    fd \
     ripgrep \
     exa \
     software-properties-common \
