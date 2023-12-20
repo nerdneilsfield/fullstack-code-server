@@ -1,0 +1,36 @@
+version: "3"
+
+networks:
+  proxy:
+    external: true
+
+services:
+  code-server:
+    image: nerdneils/fullstack-code-server:latest
+    restart: unless-stopped
+    container_name: code-server
+    networks:
+      - proxy
+    # command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "start"]
+    # ports:
+    #   - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./workspace:/config
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - "traefik.http.routers.code-server.entrypoints=http"
+      - "traefik.http.routers.code-server.rule=Host(`example-domain`)"
+      # - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.code-server.middlewares=rp-https-redirect@docker,forward-ip@docker"
+      - traefik.http.routers.code-server-secure.entrypoints=https
+      - "traefik.http.routers.code-server-secure.rule=Host(`example-domain`)"
+      - traefik.http.routers.code-server-secure.tls=true
+      - traefik.http.routers.code-server-secure.tls.certresolver=cloudflare
+      - "traefik.http.services.code-server.loadbalancer.server.port=8443"
