@@ -29,10 +29,9 @@ RUN apt-get update && apt-get install -y \
     gcc-13 \
     g++-13 \
     && mkdir -p /etc/apt/keyrings \
-    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-    && echo 'deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x focal main' | tee /etc/apt/sources.list.d/nodesource.list \
-    && apt-get update && apt-get install -y \
-    nodejs npm \
+    && curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh \
+    && bash nsolid_setup_deb.sh 21 \
+    && apt-get install nodejs -y \
     && npm install -g yarn pnpm \
     && wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - \
     && echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main" >> /etc/apt/sources.list.d/llvm.list \
