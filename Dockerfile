@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     fzf \
     ripgrep \
     exa \
+    htop \
+    neofetch \
     software-properties-common \
     && add-apt-repository -y ppa:deadsnakes/ppa \
     && add-apt-repository -y ppa:longsleep/golang-backports \
@@ -45,6 +47,14 @@ RUN apt-get update && apt-get install -y \
     && apt-get update && apt-get install -y \
     clang-format clang-tidy clang-tools clang clangd libc++-dev libc++1 libc++abi-dev libc++abi1 libclang-dev libclang1 liblldb-dev libllvm-ocaml-dev libomp-dev libomp5 lld llvm-dev llvm-runtime llvm python3-clang \
     && apt-get install -y unrar unzip stow pv \
+    && curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list \
+    && apt update && apt-get install -y zulu21-jdk lldb\
+    && wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm -rf packages-microsoft-prod.deb \
+    && apt-get update \
+    && apt-get install -y dotnet-sdk-8.0 dotnet-runtime-8.0 aspnetcore-runtime-8.0 \
     && apt-get clean \ 
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/*
